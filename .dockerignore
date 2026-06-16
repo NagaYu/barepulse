@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.db
+*.db-wal
+*.db-shm
+.git/
+.gitignore
+.env
+.DS_Store
+deploy/
+README.md

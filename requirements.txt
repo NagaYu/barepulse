@@ -1,0 +1,13 @@
+# BarePulse — runtime dependencies (pinned for reproducible deploys)
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+sqlalchemy==2.0.36
+greenlet==3.1.1          # required by SQLAlchemy's async engine
+aiosqlite==0.20.0        # async driver for the default SQLite backend
+user-agents==2.2.0
+pydantic==2.10.4
+
+# --- PostgreSQL (optional) -------------------------------------------------
+# To run on Postgres instead of SQLite, install the async driver and set:
+#   DATABASE_URL=postgresql+asyncpg://user:pass@host:5432/barepulse
+# asyncpg==0.30.0

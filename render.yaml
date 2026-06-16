@@ -1,0 +1,28 @@
+# BarePulse — one-click Render Blueprint.
+# Push this repo to GitHub, then "New +" -> "Blueprint" on Render.
+services:
+  - type: web
+    name: barepulse
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips='*'
+    healthCheckPath: /api/health
+    # Persistent disk so the SQLite database survives deploys/restarts.
+    disk:
+      name: barepulse-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: BAREPULSE_ENV
+        value: production
+      - key: BAREPULSE_TRUST_PROXY
+        value: "true"
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:////var/data/barepulse.db
+      - key: BAREPULSE_SALT
+        generateValue: true        # Render generates a strong random value
+      - key: BAREPULSE_USER
+        value: admin
+      - key: BAREPULSE_PASSWORD
+        sync: false                # set this secret in the Render dashboard

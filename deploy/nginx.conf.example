@@ -1,0 +1,32 @@
+# BarePulse — Nginx reverse proxy (VPS).
+# 1) Point DNS at this box.  2) Get TLS:  sudo certbot --nginx -d analytics.example.com
+# 3) sudo cp this to /etc/nginx/sites-available/barepulse && ln -s to sites-enabled
+#    sudo nginx -t && sudo systemctl reload nginx
+
+server {
+    listen 80;
+    server_name analytics.example.com;
+    # Certbot will add the HTTPS server block and redirect 80 -> 443.
+
+    location / {
+        proxy_pass         http://127.0.0.1:8000;
+        proxy_http_version 1.1;
+
+        # Required so BarePulse sees the real client IP and scheme.
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+
+        proxy_read_timeout 30s;
+    }
+
+    # Cache the tracker aggressively (it changes rarely).
+    location = /tracker.js {
+        proxy_pass         http://127.0.0.1:8000;
+        proxy_set_header   Host $host;
+        add_header         Cache-Control "public, max-age=86400";
+    }
+
+    client_max_body_size 16k;  # collector payloads are tiny
+}

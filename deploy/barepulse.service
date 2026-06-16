@@ -1,0 +1,30 @@
+# BarePulse — systemd unit (VPS).
+# 1) Put the app in /opt/barepulse with a venv at /opt/barepulse/.venv
+# 2) Create /etc/barepulse.env from .env.example (chmod 600, root-owned)
+# 3) sudo cp this to /etc/systemd/system/barepulse.service
+#    sudo systemctl daemon-reload && sudo systemctl enable --now barepulse
+
+[Unit]
+Description=BarePulse analytics
+After=network.target
+
+[Service]
+Type=simple
+User=barepulse
+Group=barepulse
+WorkingDirectory=/opt/barepulse
+EnvironmentFile=/etc/barepulse.env
+ExecStart=/opt/barepulse/.venv/bin/uvicorn app.main:app \
+    --host 127.0.0.1 --port 8000 \
+    --proxy-headers --forwarded-allow-ips='127.0.0.1'
+Restart=always
+RestartSec=3
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
