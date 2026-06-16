@@ -7,6 +7,8 @@
 No cookies. No third parties. No consent banners. No monthly bill.
 Your data never leaves your server.
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/NagaYu/barepulse)
+
 </div>
 
 ---
@@ -137,10 +139,11 @@ expose an insecure instance.
 
 ### Option A — Render (one click)
 
-A `render.yaml` Blueprint is included. Push to GitHub → Render → **New +** →
-**Blueprint**. It provisions a persistent disk (so SQLite survives deploys),
-auto-generates `BAREPULSE_SALT`, and turns on `BAREPULSE_TRUST_PROXY`. Just set
-`BAREPULSE_PASSWORD` in the dashboard. HTTPS is automatic.
+A `render.yaml` Blueprint is included — click the **Deploy to Render** button
+above, or go to Render → **New +** → **Blueprint** and pick this repo. It
+provisions a persistent disk (so SQLite survives deploys), auto-generates
+`BAREPULSE_SALT`, and turns on `BAREPULSE_TRUST_PROXY`. Just set
+`BAREPULSE_PASSWORD` when prompted. HTTPS is automatic.
 
 ### Option B — Docker
 
