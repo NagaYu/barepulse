@@ -135,7 +135,7 @@ This repo ships with everything needed for a safe public deployment. In
 if the salt or dashboard password are missing — so you can't accidentally
 expose an insecure instance.
 
-### Option A — Render (one click)
+### Option A — Render
 
 A `render.yaml` Blueprint is included — go to Render → **New +** →
 **Blueprint** and pick this repo. It
