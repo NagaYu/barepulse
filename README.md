@@ -7,8 +7,6 @@
 No cookies. No third parties. No consent banners. No monthly bill.
 Your data never leaves your server.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/NagaYu/barepulse)
-
 </div>
 
 ---
@@ -139,8 +137,8 @@ expose an insecure instance.
 
 ### Option A — Render (one click)
 
-A `render.yaml` Blueprint is included — click the **Deploy to Render** button
-above, or go to Render → **New +** → **Blueprint** and pick this repo. It
+A `render.yaml` Blueprint is included — go to Render → **New +** →
+**Blueprint** and pick this repo. It
 provisions a persistent disk (so SQLite survives deploys), auto-generates
 `BAREPULSE_SALT`, and turns on `BAREPULSE_TRUST_PROXY`. Just set
 `BAREPULSE_PASSWORD` when prompted. HTTPS is automatic.
@@ -318,3 +316,11 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 Built to be owned. **Your traffic. Your server. Your data.**
 
 </div>
+
+## License
+
+Proprietary — Copyright (c) 2026 Yuta Nagao, all rights reserved.
+This repository is public for evaluation only; no licence to use, copy,
+modify, or distribute is granted. The project is available for
+acquisition or licensing — contact via
+https://nagayu-portfolio.nagayu.workers.dev/en
